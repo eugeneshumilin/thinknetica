@@ -8,8 +8,9 @@ c = gets.to_f
 d = b**2 - 4 * a * c
 
 if d > 0
-  x1 = (-b + Math.sqrt(d)) / (2 * a)
-  x2 = (-b - Math.sqrt(d)) / (2 * a)
+  math_sqrt = Math.sqrt(d)
+  x1 = (-b + math_sqrt / (2 * a)
+  x2 = (-b - math_sqrt / (2 * a)
   puts "Дискриминант равен #{d}. Корень 1 равен #{x1}, Корень 2 равен #{x2}"
 elsif d == 0
   x = -b / (2 * a)
