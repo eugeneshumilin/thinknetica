@@ -7,25 +7,21 @@ b = gets.to_f
 print 'Введите длину третьей стороны треугольника: '
 c = gets.to_f
 
-
 if a == b && b == c
   puts 'Треугольник равнобедренный и равносторонний'
   exit
 end
 
+sides = [a, b, c]
+sides.sort!
 
-if a > b && a > c
-  hypotenuse = a
-  cathetus1 = b
-  cathetus2 = c
-elsif b > a && b > c
-  hypotenuse = b
-  cathetus1 = a
-  cathetus2 = c
-elsif c > b && c > a
-  hypotenuse = c
-  cathetus1 = a
-  cathetus2 = b
+if sides[1] == sides[2]
+  puts 'Треугольник равнобедренный'
+  exit
+else  
+  cathetus1 = sides[0]
+  cathetus2 = sides[1]
+  hypotenuse = sides[2]
 end
 
 if (hypotenuse**2 == cathetus1**2 + cathetus2**2) && cathetus1 == cathetus2
