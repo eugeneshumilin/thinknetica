@@ -19,3 +19,4 @@ loop do
   puts "В корзине: #{basket}"
   puts "Итоговая сумма: #{final_sum}"
 end
+

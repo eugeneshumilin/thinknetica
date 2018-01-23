@@ -9,3 +9,4 @@ while fib[n] + fib[n - 1] < 100
 end
 
 puts fib
+
