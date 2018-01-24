@@ -1,6 +1,7 @@
-arr = (10..100).to_a
-
-arr.delete_if {|i| i % 5 != 0}
-
+arr = [10]
+loop do
+  arr << arr.last + 5 
+  break if arr.last >= 100
+end
 puts arr
 

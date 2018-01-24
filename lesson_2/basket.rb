@@ -1,5 +1,4 @@
 basket = {}
-sum = 0
 final_sum = 0
 
 loop do
@@ -11,12 +10,13 @@ loop do
   print 'Введите количество товара: '
   count = gets.to_f
 
-  sum = price * count
-  basket[item] = {count => price}
-  final_sum += sum
-
-  puts "Сумма за текущий товар: #{sum}$"
-  puts "В корзине: #{basket}"
-  puts "Итоговая сумма: #{final_sum}"
+  basket[item] = {price: price, count: count}
+  final_sum += price * count
 end
+
+basket.each do |product, props|
+  puts "Товар: #{product}\nЦена за ед.: #{props[:price]}\nКол-во ед. товара: #{props[:count]}"
+end
+
+puts "Итоговая сумма заказа: #{final_sum}"
 
