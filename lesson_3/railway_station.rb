@@ -22,3 +22,4 @@ class RailwayStation
     trains.count {|train| train.type == :passenger}
   end
 end
+
