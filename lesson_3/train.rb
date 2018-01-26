@@ -1,50 +1,50 @@
-require_relative 'route'
-require_relative 'railway_station'
-
 class Train
-  attr_accessor :speed, :route, :station
-  attr_reader :wagons
+  attr_accessor :speed
+  attr_reader :wagons, :type, :train_route, :current_station
 
-  def initialize(number, type, wagons)
+  def initialize(number, type = :passenger, wagons = 0)
     @number = number
-    @type = type if type == 'cargo' || type == 'passenger'
+    @type = type
     @wagons = wagons
-    @index = 0
+    @speed = 0
+    @index_station = 0
   end
 
   def stop
-    self.speed = 0
+    @speed = 0
   end
 
   def add_wagon
-    @wagons += 1 if speed == 0
+    @speed == 0 ? @wagons += 1 : @wagons
   end
-  
+
   def remove_wagon
-    @wagons -= 1 if speed == 0
-  end     
-  
+    (@speed == 0 && @wagons != 0) ? @wagons -= 1 : @wagons
+  end
+
   def take_route(route)
-    self.route = route
-    self.station = route.stations[@index]
+    @train_route = route
+    @current_station = @train_route.stations.first
+    @current_station.arrive(self)
   end
 
   def move_next_station
-    self.station = route.stations[@index + 1]
+    @current_station = self.next_station
+    @current_station.arrive(self)
   end
 
   def move_previous_station
-    if @index != 0
-      self.station = route.stations[@index -1]  
-    elsif self.route.nil? 
-      puts 'Маршрут для поезда не задан'
-    else
-      puts 'Поезд находится на первой станции маршрута'
-    end
+    @current_station = self.previous_station
+    @current_station.arrive(self)
   end
 
-  def list_station
-    puts "Поезд находитс на станции #{station}, предыдущая станция - #{route.stations[@index -1]}, следующая станция маршрута - #{route.stations[index + 1]}"
+  private
+
+  def next_station
+    @train_route.stations[@index_station += 1] if @index_station != @train_route.stations.size - 1
+  end
+
+  def previous_station
+    @train_route.stations[@index_station -= 1] if @index_station != 0
   end
 end
-
