@@ -11,7 +11,7 @@ class RailwayStation
   end
 
   def depart(train)
-    @trains.delete(train) if trains.include?(train)
+    @trains.delete(train) if @trains.include?(train)
   end
 
   def trains_type_count(type)
