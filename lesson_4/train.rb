@@ -21,7 +21,7 @@ class Train
   end
 
   def add_wagon(wagon)
-    @wagons << wagon if @speed == 0
+    @wagons << wagon if @speed == 0 && check_class(wagon)
   end
 
   def remove_wagon(wagon)
