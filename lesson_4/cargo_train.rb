@@ -5,4 +5,3 @@ class CargoTrain < Train
     wagon.class == CargoWagon
   end
 end
-

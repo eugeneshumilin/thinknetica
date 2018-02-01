@@ -14,4 +14,3 @@ class Route
     @stations.delete(station) if @stations.include?(station)
   end
 end
-

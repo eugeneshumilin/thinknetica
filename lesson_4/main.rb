@@ -11,4 +11,3 @@ puts 'Пользовательский интерфейс'
 user_interface = UserInterface.new
 user_interface.show_menu
 user_interface.control
-

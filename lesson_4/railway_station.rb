@@ -18,4 +18,3 @@ class RailwayStation
     @trains.count {|train| train.type == type}
   end
 end
-

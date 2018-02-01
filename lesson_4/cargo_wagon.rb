@@ -1,3 +1,2 @@
 class CargoWagon
 end
-

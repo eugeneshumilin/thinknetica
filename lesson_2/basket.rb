@@ -19,4 +19,3 @@ basket.each do |product, props|
 end
 
 puts "Итоговая сумма заказа: #{final_sum}"
-
