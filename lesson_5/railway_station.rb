@@ -11,7 +11,6 @@ class RailwayStation
     @@stations
   end
 
-
   def initialize(name)
     register_instance
     @name = name
@@ -28,6 +27,6 @@ class RailwayStation
   end
 
   def trains_type_count(type)
-    @trains.count {|train| train.type == type}
+    @trains.count { |train| train.type == type }
   end
 end

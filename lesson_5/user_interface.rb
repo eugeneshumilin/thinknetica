@@ -1,5 +1,4 @@
 class UserInterface
-
   def initialize
     @stations = []
     @trains = []
@@ -25,7 +24,7 @@ class UserInterface
 
   def control
     loop do
-      print "Выберите действие: "
+      print 'Выберите действие: '
       action = gets.chomp
       case action
       when '1'
@@ -102,7 +101,7 @@ class UserInterface
     route = route_choice
     station = station_choice
     route.add_station(station)
-    puts "Станция добавлена"
+    puts 'Станция добавлена'
   end
 
   def delete_station_from_route
@@ -148,19 +147,19 @@ class UserInterface
 
   def list_of_trains
     station = station_choice
-    station.trains.each {|train| puts "#{train.number} - #{train.class}"}
+    station.trains.each { |train| puts "#{train.number} - #{train.class}" }
   end
 
   def show_trains
-    @trains.each.with_index(1) {|train, index| puts "#{index} - #{train.number} - #{train.class}"}
+    @trains.each.with_index(1) { |train, index| puts "#{index} - #{train.number} - #{train.class}" }
   end
 
   def show_stations
-    @stations.each.with_index(1) {|station, index| puts "#{index} - #{station.name}"}
+    @stations.each.with_index(1) { |station, index| puts "#{index} - #{station.name}" }
   end
 
   def show_routes
-    @routes.each.with_index(1) {|route, index| puts "#{index} - #{route.name}"}
+    @routes.each.with_index(1) { |route, index| puts "#{index} - #{route.name}" }
   end
 
   def route_choice

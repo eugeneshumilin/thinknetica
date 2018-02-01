@@ -9,7 +9,7 @@ class Train
 
   @@trains = {}
 
-   def self.find(number)
+  def self.find(number)
     @@trains[number]
   end
 
@@ -35,11 +35,11 @@ class Train
   end
 
   def add_wagon(wagon)
-    @wagons << wagon if @speed == 0 && check_class(wagon)
+    @wagons << wagon if @speed.zero? && check_class(wagon)
   end
 
   def remove_wagon(wagon)
-    @wagons.delete(wagon) if @wagons.include?(wagon) && @speed == 0
+    @wagons.delete(wagon) if @wagons.include?(wagon) && @speed.zero?
   end
 
   def take_route(route)

@@ -3,7 +3,7 @@ class Route
 
   def initialize(first, last)
     @stations = [first, last]
-    @name = first.name + "-" + last.name
+    @name = first.name + '-' + last.name
   end
 
   def add_station(station)
