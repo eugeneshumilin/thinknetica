@@ -23,4 +23,3 @@ module InstanceCounter
     end
   end
 end
-

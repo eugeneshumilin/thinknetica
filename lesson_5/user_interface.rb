@@ -181,4 +181,3 @@ class UserInterface
     station = @stations[gets.to_i - 1]
   end
 end
-

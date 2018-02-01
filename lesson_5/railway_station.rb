@@ -1,4 +1,8 @@
+require_relative 'instance_counter'
+
 class RailwayStation
+  include InstanceCounter
+
   attr_reader :name, :trains
 
   @@stations = []
@@ -9,6 +13,7 @@ class RailwayStation
 
 
   def initialize(name)
+    register_instance
     @name = name
     @trains = []
     @@stations << self
@@ -26,4 +31,3 @@ class RailwayStation
     @trains.count {|train| train.type == type}
   end
 end
-

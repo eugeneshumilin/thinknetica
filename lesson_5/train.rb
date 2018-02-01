@@ -80,4 +80,3 @@ class Train
     @train_route.stations[@index_station - 1] if @index_station != 0
   end
 end
-

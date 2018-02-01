@@ -1,3 +1,2 @@
 class CargoWagon < Wagon
 end
-
