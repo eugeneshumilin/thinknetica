@@ -168,18 +168,18 @@ class UserInterface
   def route_choice
     puts 'Выберите маршрут по индексу:'
     show_routes
-    route = @routes[gets.to_i - 1]
+    @routes[gets.to_i - 1]
   end
 
   def train_choice
     puts 'Выберите поезд по индексу:'
     show_trains
-    train = @trains[gets.to_i - 1]
+    @trains[gets.to_i - 1]
   end
 
   def station_choice
     puts 'Выберите станцию по индексу:'
     show_stations
-    station = @stations[gets.to_i - 1]
+    @stations[gets.to_i - 1]
   end
 end
