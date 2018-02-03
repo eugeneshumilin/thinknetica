@@ -2,6 +2,6 @@ class PassengerTrain < Train
   private
 
   def check_class(wagon)
-    wagon.class == PassengerWagon
+    wagon.is_a?(PassengerWagon)
   end
 end

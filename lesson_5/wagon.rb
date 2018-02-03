@@ -1,5 +1,5 @@
 require_relative 'company'
 
 class Wagon
-  include Manufacturer
+  include Company
 end
