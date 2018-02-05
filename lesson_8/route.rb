@@ -21,7 +21,9 @@ class Route
   protected
 
   def validate!
-    unless @stations.first.is_a?(RailwayStation) && @stations.last.is_a?(RailwayStation)
+    first = @stations.first
+    last = @stations.last
+    unless first.is_a?(RailwayStation) && last.is_a?(RailwayStation)
       raise 'Parameters must be objects of the RailwayStation class'
     end
     true

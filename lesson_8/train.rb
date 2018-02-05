@@ -83,7 +83,7 @@ class Train
   end
 
   def previous_station
-    @train_route.stations[@index_station - 1] if @index_station != 0
+    @train_route.stations[@index_station - 1] if @index_station.nonzero?
   end
 
   def each_wagon

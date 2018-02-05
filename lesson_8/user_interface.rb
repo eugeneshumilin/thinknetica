@@ -5,6 +5,22 @@ class UserInterface
     @routes = []
   end
 
+  def control
+    show_menu
+    loop do
+      action
+      print 'Выберите действие: '
+      input = gets.chomp
+      if action[input].nil?
+        puts 'Некорректный ввод. Повторите...'
+      else
+        action[input].call
+      end
+    end
+  end
+
+  private
+
   def show_menu
     [
       '1 - Создать станцию', '2 - Создать поезд', '3 - Создать маршрут',
@@ -20,37 +36,26 @@ class UserInterface
     ].each { |point| puts point }
   end
 
-  def control
-    loop do
-      actions = {
-        '1' => method(:create_station),
-        '2' => method(:create_train),
-        '3' => method(:create_route),
-        '4' => method(:add_station_to_route),
-        '5' => method(:delete_station_from_route),
-        '6' => method(:set_route_to_train),
-        '7' => method(:add_wagon_to_train),
-        '8' => method(:remove_wagon_from_train),
-        '9' => method(:forward),
-        '10' => method(:back),
-        '11' => method(:show_stations),
-        '12' => method(:list_of_trains),
-        '13' => method(:show_each_train_on_stations),
-        '14' => method(:fill_wagon),
-        '15' => method(:exit), 'exit' => method(:exit),
-        '16' => method(:show_menu), 'help' => method(:show_menu)
-      }
-      print 'Выберите действие: '
-      input = gets.chomp
-      if actions[input].nil?
-        puts 'Некорректный ввод. Повторите...'
-      else
-        actions[input].call
-      end
-    end
+  def action
+    {
+      '1' => method(:create_station),
+      '2' => method(:create_train),
+      '3' => method(:create_route),
+      '4' => method(:add_station_to_route),
+      '5' => method(:delete_station_from_route),
+      '6' => method(:set_route_to_train),
+      '7' => method(:add_wagon_to_train),
+      '8' => method(:remove_wagon_from_train),
+      '9' => method(:forward),
+      '10' => method(:back),
+      '11' => method(:show_stations),
+      '12' => method(:list_of_trains),
+      '13' => method(:show_each_train_on_stations),
+      '14' => method(:fill_wagon),
+      '15' => method(:exit), 'exit' => method(:exit),
+      '16' => method(:show_menu), 'help' => method(:show_menu)
+    }
   end
-
-  private
 
   def create_station
     print 'Введите название станции: '
