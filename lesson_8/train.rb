@@ -54,7 +54,7 @@ class Train
   end
 
   def move_next_station
-    if current_station != @train_route.stations.last
+    if current_station != route_stations.last
       current_station.depart(self)
       @index_station += 1
       current_station.arrive(self)
@@ -64,7 +64,7 @@ class Train
   end
 
   def move_previous_station
-    if current_station != @train_route.stations.first
+    if current_station != route_stations.first
       current_station.depart(self)
       @index_station -= 1
       current_station.arrive(self)
@@ -74,16 +74,16 @@ class Train
   end
 
   def current_station
-    @train_route.stations[@index_station]
+    route_stations[@index_station]
   end
 
   def next_station
-    size = @train_route.stations.size
-    @train_route.stations[@index_station + 1] if @index_station != size - 1
+    size = route_stations.size
+    route_stations[@index_station + 1] if @index_station != size - 1
   end
 
   def previous_station
-    @train_route.stations[@index_station - 1] if @index_station.nonzero?
+    route_stations[@index_station - 1] if @index_station.nonzero?
   end
 
   def each_wagon
@@ -97,5 +97,11 @@ class Train
     raise 'Number has invalid format' if number !~ NUMBER_FORMAT
     raise 'Numbers cannot be duplicated' unless @@trains[number].nil?
     true
+  end
+
+  private
+
+  def route_stations
+    @train_route.stations
   end
 end
