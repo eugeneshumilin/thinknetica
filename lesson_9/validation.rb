@@ -11,21 +11,26 @@ module Validation
   }.freeze
 
   module ClassMethods
-    def validate(*args)
-      unless instance_variable_get(:@validations)
-        instance_variable_set(:@validations, [])
-      end
-      instance_variable_get(:@validations) << args
+    def validate(attribute, val_type, *param)
+      @validations ||= {}
+      validations[attribute] = { val_type: val_type, param: param.first }
+      define_method("validations") { self.class.instance_variable_get("@validations") }
+      define_method("attr_value") { |name| instance_variable_get("@#{name}") }
     end
+
+    private
+
+    attr_reader :validations
   end
 
   module InstanceMethods
     def validate!
-      self.class.instance_variable_get(:@validations).each do |args|
-        val = instance_variable_get("@#{args[0]}")
-        message = "#{args[0]} #{Validation::ERROR_MESSAGES[args[1]]}"
-        raise message if send("validate_#{args[1]}", val, *args[2])
-        puts "#{args[0]} - #{args[1]} OK"
+      validations.each do |attribute, args|
+        val_type = args[:val_type]
+        param = args[:param]
+        message = "#{attribute} #{Validation::ERROR_MESSAGES[val_type]}"
+        raise message if send("#{val_type}", attribute, param)
+        puts "'#{attribute} - #{val_type}' validation OK"
       end
       true
     end
@@ -38,16 +43,16 @@ module Validation
 
     private
 
-    def validate_presence(val)
-      val.empty? || val.nil?
+    def presence(attribute, _option)
+      attr_value(attribute).empty? || attr_value(attribute).nil?
     end
 
-    def validate_type(val, type)
-      val.class != type
+    def format(attribute, format)
+      attr_value(attribute) !~ format
     end
 
-    def validate_format(val, format)
-      val !~ format
+    def type(attribute, type)
+      attr_value(attribute).class != type
     end
   end
 end
