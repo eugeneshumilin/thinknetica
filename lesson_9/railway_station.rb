@@ -10,7 +10,6 @@ class RailwayStation
   attr_reader :name, :trains
 
   validate :name, :presence
-  validate :name, :type, String
 
   @@stations = []
 

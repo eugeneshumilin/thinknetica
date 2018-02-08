@@ -5,8 +5,7 @@ class Route
   include Validation
   include Accessors
   attr_reader :name, :stations
-  
-  validate :stations, :presence
+
   validate :name, :presence
 
   def initialize(first, last)

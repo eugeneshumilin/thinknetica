@@ -4,33 +4,23 @@ module Validation
     receiver.send :include, InstanceMethods
   end
 
-  ERROR_MESSAGES = {
-    presence: 'value is empty or nil!',
-    format: 'invalid format!',
-    type: 'invalid type for object!'
-  }.freeze
-
   module ClassMethods
-    def validate(attribute, val_type, *param)
-      @validations ||= {}
-      validations[attribute] = { val_type: val_type, param: param.first }
-      define_method("validations") { self.class.instance_variable_get("@validations") }
-      define_method("attr_value") { |name| instance_variable_get("@#{name}") }
-    end
-
-    private
-
     attr_reader :validations
+
+    def validate(attr_name, *params)
+      @validations ||= []
+      @validations << { attr_name => params }
+    end
   end
 
   module InstanceMethods
     def validate!
-      validations.each do |attribute, args|
-        val_type = args[:val_type]
-        param = args[:param]
-        message = "#{attribute} #{Validation::ERROR_MESSAGES[val_type]}"
-        raise message if send("#{val_type}", attribute, param)
-        puts "'#{attribute} - #{val_type}' validation OK"
+      self.class.validations.each do |values|
+        values.each do |attr_name, params|
+          attribute = instance_variable_get("@#{attr_name}")
+          send(params[0].to_s, attribute, params[1])
+          puts "'#{attr_name} - #{params[0]}' validation OK"
+        end
       end
       true
     end
@@ -44,15 +34,15 @@ module Validation
     private
 
     def presence(attribute, _option)
-      attr_value(attribute).empty? || attr_value(attribute).nil?
+      raise 'value is empty or nil!' if attribute.empty? || attribute.nil?
     end
 
     def format(attribute, format)
-      attr_value(attribute) !~ format
+      raise 'invalid format!' if attribute !~ format
     end
 
     def type(attribute, type)
-      attr_value(attribute).class != type
+      raise 'invalid type for object!' if attribute.class != type
     end
   end
 end
